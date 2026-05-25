@@ -9,7 +9,7 @@ Computer Vision, A.A. 2025–2026 — Sapienza Università di Roma
 
 This project investigates whether **JPEG AI** compression (the first international standard for end-to-end learned image compression) undermines the reliability of state-of-the-art deepfake detectors.
 
-JPEG AI encodes and decodes images using deep neural networks, producing compression artifacts with a fundamentally different statistical signature from classical JPEG. As shown by [Cannas et al., ICCVW 2025], these artifacts closely resemble the neural fingerprints left by image synthesis pipelines (GANs, diffusion models), causing forensic detectors to misclassify pristine compressed images as synthetically generated.
+JPEG AI encodes and decodes images using deep neural networks, producing compression artifacts with a fundamentally different statistical signature from classical JPEG. As shown by Cannas, these artifacts closely resemble the neural fingerprints left by image synthesis pipelines (GANs, diffusion models), causing forensic detectors to misclassify pristine compressed images as synthetically generated.
 
 The project is structured in three phases:
 
@@ -37,7 +37,7 @@ README.md
 - A balanced subset of **200 images** (100 real + 100 fake) was sampled from the test split with a fixed seed (42) for reproducibility.
 - Dataset link: [OpenFake on Kaggle](https://www.kaggle.com/datasets/manjilkarki/deepfake-and-real-images)
 
-OpenFake was chosen because its fake images come from diffusion-model generators — exactly the domain targeted by the primary detector (Corvi2023), making the counter-forensic effect measurable.
+OpenFake was chosen because its fake images come from diffusion-model generators, which isexactly the domain targeted by the primary detector (Corvi2023), making the counter-forensic effect measurable.
 
 ---
 
@@ -93,7 +93,7 @@ Corvi2023 collapses from AUC = 0.93 to **AUC = 0.43 at BPP = 0.12** — below ch
 
 ### Methodology
 
-Following the approach of the paper:
+Following the approach of the paper I computed four metrics:
 
 1. **2D Fourier spectra** of noise residuals (high-pass Gaussian filter, σ = 2) — computed separately for real/fake at each BPP.
 2. **1D radial profiles** (azimuthal average of 2D spectra) — expose periodic peaks introduced by JPEG AI's neural upsamplers.
@@ -206,10 +206,8 @@ The ResNet50 backbone of Corvi2023 is frozen; only the linear head (`Linear(2048
 | Challenge | Solution |
 |-----------|----------|
 | JPEG AI requires numpy 1.x; modern detectors require numpy 2.x — incompatible in the same kernel | Isolated venv (numpy 1.x) for the codec, invoked as a subprocess; main kernel stays on numpy 2.x |
-| `python -m venv` unavailable on Colab (missing ensurepip) | Used `virtualenv` with a manual pip bootstrap |
 | JPEG AI source incompatibilities (pynvml, ptflops, numpy) | Three source patches re-applied at each session |
 | `unfold` error on small images in the JPEG AI encoder | Padding to alignment-multiple dimensions before encoding; BPP computed on original pixel count |
-| `config.yaml` vs `config.json` mismatch in CLIP-Det weights | Load via `yaml.safe_load`; read `arch` key instead of `model_name` |
 
 ---
 
