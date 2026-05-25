@@ -88,17 +88,17 @@ Corvi2023 collapses from AUC = 0.93 to **AUC = 0.43 at BPP = 0.12** — below ch
 ![Phase 1 results](assets/phase1_results.png)
 
 ---
-
+    
 ## Phase 2 — Frequency-Domain Forensic Analysis
 
 ### Methodology
 
 Following the approach of the paper I computed four metrics:
 
-1. **2D Fourier spectra** of noise residuals (high-pass Gaussian filter, σ = 2) — computed separately for real/fake at each BPP.
-2. **1D radial profiles** (azimuthal average of 2D spectra) — expose periodic peaks introduced by JPEG AI's neural upsamplers.
-3. **DCT 8×8 coefficient distributions** — quantify how JPEG AI alters block-frequency statistics.
-4. **Spectral distance vs AUC drop** — three normalized L2 distances per BPP, including `dist_cross_real_origfake` (how spectrally similar compressed reals are to original fakes).
+1. **2D Fourier spectra** of noise residuals (high-pass Gaussian filter, σ = 2) computed separately for real/fake at each BPP.
+2. **1D radial profiles** (azimuthal average of 2D spectra) that expose periodic peaks introduced by JPEG AI's neural upsamplers.
+3. **DCT 8×8 coefficient distributions** that quantify how JPEG AI alters block-frequency statistics.
+4. **Spectral distance vs AUC drop** : three normalized L2 distances per BPP, including `dist_cross_real_origfake` (how spectrally similar compressed reals are to original fakes).
 
 ### Key Findings
 
