@@ -37,7 +37,7 @@ README.md
 - A balanced subset of **200 images** (100 real + 100 fake) was sampled from the test split with a fixed seed (42) for reproducibility.
 - Dataset link: [OpenFake on Kaggle](https://www.kaggle.com/datasets/manjilkarki/deepfake-and-real-images)
 
-OpenFake was chosen because its fake images come from diffusion-model generators, which isexactly the domain targeted by the primary detector (Corvi2023), making the counter-forensic effect measurable.
+OpenFake was chosen because its fake images come from diffusion-model generators, which is exactly the domain targeted by the primary detector (Corvi2023), making the counter-forensic effect measurable.
 
 ---
 
